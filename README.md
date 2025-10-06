@@ -1,51 +1,94 @@
-# orangehrm-pw-testing
+# OrangeHRM Playwright Testing
 
-Automated end-to-end tests for [OrangeHRM](https://www.orangehrm.com/) using **Playwright**.
+This repository contains end-to-end tests for the OrangeHRM application using Playwright. The tests focus on key functionalities such as login, ensuring reliable automation for UI interactions.
 
-## 📂 Project Structure
+## Table of Contents
 
-orangehrm-pw-testing/
-├─ node_modules/ # Ignored by Git
-├─ tests/ # Playwright test scripts
-├─ .github/
-│ └─ workflows/
-│ └─ playwright.yml # GitHub Actions workflow
-├─ package.json
-├─ package-lock.json
-└─ README.md
+- [Installation](#installation)
+- [Project Structure](#project-structure)
+- [Running Tests](#running-tests)
+- [Configuration](#configuration)
+- [Fixtures](#fixtures)
+- [Reporting](#reporting)
+- [Contributing](#contributing)
+- [License](#license)
 
-bash
-Copy code
+ 
+## Installation
 
-## ⚡ Getting Started
-
-1. **Clone the repository**
-
-```bash
+1. Clone the repository:
+```
 git clone https://github.com/mohammed-g77/orangehrm-pw-testing.git
 cd orangehrm-pw-testing
-Install dependencies
+```
 
-bash
-Copy code
+2. Install dependencies:
+```
 npm install
-Run tests locally
+```
+3. Install Playwright browsers:
+```
+npx playwright install
+```
+## Project Structure
 
-bash
-Copy code
+- **.github/workflows**: GitHub Actions workflows for CI/CD.
+- **fixtures**: Custom fixtures for test setup (e.g., page objects or data providers).
+- **node_modules**: Installed dependencies (not tracked in Git).
+- **pages**: Page Object Models (e.g., `LoginPage.ts` for login-related interactions).
+- **test-results**: Generated test artifacts like screenshots, videos, and traces.
+- **tests**: Test specs (e.g., `login.spec.ts` for login tests).
+- **playwright.yml**: Playwright configuration file.
+- **.gitignore**: Files and directories to ignore in Git.
+- **package.json**: Project metadata and dependencies.
+- **package-lock.json**: Locked versions of dependencies.
+
+## Running Tests
+
+To run all tests in headless mode:
+```
 npx playwright test
-Make sure you have Node.js installed.
+```
+Run tests in headed mode (with browser UI):
+```
+npx playwright test --headed
+```
+Run a specific test file:
+```
+npx playwright test tests/login.spec.ts
 
-🏗 GitHub Actions
-This project uses a Playwright workflow to automatically run tests on every push or pull request.
-You can monitor test results in the Actions tab of your GitHub repository.
+```
 
-⚙ Configuration
-Tests are written in Playwright using JavaScript.
+## Configuration
 
-node_modules is ignored in Git (.gitignore).
+The main configuration is in `playwright.yml`. Key settings include:
+- Browser projects (e.g., Chromium, Firefox, WebKit).
+- Base URL for the OrangeHRM instance (update as needed).
+- Retries, timeouts, and workers for parallel execution.
 
-Add or modify tests inside the tests/ directory.
+Example snippet:
+```
+yaml
+projects:
+  - name: 'chromium'
+    use: { ...devices['Desktop Chrome'] }
+```
+## Fixtures
+Fixtures are defined in the fixtures directory. They provide reusable setup for tests, such as authenticated sessions or mocked data.
 
-📄 License
-This project is licensed under the MIT License.
+## Reporting
+After running tests, view the HTML report:
+```
+npx playwright show-report
+```
+Test results (including failures) are stored in `test-results`.
+
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/new-test`).
+3. Commit changes (`git commit -m 'Add new test'`).
+4. Push to the branch (`git push origin feature/new-test`).
+5. Open a Pull Request.
+
+Please follow code style guidelines and add tests for new features.
