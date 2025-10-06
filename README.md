@@ -3,7 +3,7 @@
 Automated end-to-end tests for [OrangeHRM](https://www.orangehrm.com/) using **Playwright**.
 
 ## 📂 Project Structure
-
+```
 orangehrm-pw-testing/
 ├─ node_modules/ # Ignored by Git
 ├─ tests/ # Playwright test scripts
@@ -13,7 +13,7 @@ orangehrm-pw-testing/
 ├─ package.json
 ├─ package-lock.json
 └─ README.md
-
+```
 bash
 Copy code
 
