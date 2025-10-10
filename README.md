@@ -35,9 +35,9 @@ npx playwright install
 - **.github/workflows**: GitHub Actions workflows for CI/CD.
 - **fixtures**: Custom fixtures for test setup (e.g., page objects or data providers).
 - **node_modules**: Installed dependencies (not tracked in Git).
-- **pages**: Page Object Models (e.g., `LoginPage.ts` for login-related interactions).
+- **pages**: Page Object Models (e.g., `LoginPage.ts` for login-related interactions,`addEmployee.spec.ts` for addEmployee-related interactions ).
 - **test-results**: Generated test artifacts like screenshots, videos, and traces.
-- **tests**: Test specs (e.g., `login.spec.ts` for login tests).
+- **tests**: Test specs (e.g., `login.spec.ts` for login tests ,`addEmployee.spec.ts` for addEmployee tests ).
 - **playwright.yml**: Playwright configuration file.
 - **.gitignore**: Files and directories to ignore in Git.
 - **package.json**: Project metadata and dependencies.
