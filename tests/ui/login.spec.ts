@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { LogIn } from '../pages/LoginPage';
+import { LogIn } from '../../pages/LoginPage';
 
 test('Login to OrangeHRM Demo site', async ({ page }) => {
   const loginObject = new LogIn(page);

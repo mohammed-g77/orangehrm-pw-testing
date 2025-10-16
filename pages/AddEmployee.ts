@@ -78,6 +78,8 @@ export class AddEmployee {
         await expect(this.cancelBtn).toBeVisible();
         await this.saveBtn.click();
         // await this.page.waitForTimeout(10000);
-        await expect(this.page).toHaveURL(/viewPersonalDetails/);
+        
+        await expect(this.page.locator('h6:has-text("Personal Details")')).toBeVisible({ timeout: 10000 });
+
     }
 }

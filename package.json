@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
-  "test": "npx playwright test --headed",
-  "test:ui": "npx playwright test --ui"
- },
+  "scripts": {
+    "test": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mohammed-g77/orangehrm-pw-testing.git"
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/mohammed-g77/orangehrm-pw-testing#readme",
   "devDependencies": {
-    "@playwright/test": "^1.55.1"
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.7.2"
   }
 }
