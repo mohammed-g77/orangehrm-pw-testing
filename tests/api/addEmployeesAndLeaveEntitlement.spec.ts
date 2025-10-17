@@ -3,7 +3,7 @@ import { Employee, LeaveType } from '../../helpers/apiHelpers';
 import { generateUniqueEmployeeIds } from '../../helpers/generateRandoms';
 const employeeData = require('../../data/employee.json');
 
-test.describe('Leave Entitlement API Tests', () => {
+test.describe('Add employees and assign leave entitlement days test', () => {
   let cookies: any;
   let addedEmployees: any[] = [];
 
