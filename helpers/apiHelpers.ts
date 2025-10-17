@@ -1,14 +1,14 @@
-// helpers/apiHelpers.ts
-import { APIRequestContext } from "@playwright/test";
-
-export async function addNewEmployeeViaAPI(apiContext: APIRequestContext, employee: { firstName: string, lastName: string, username: string, password: string }) {
-  const response = await apiContext.post("/employee", {
-    data: {
-      firstName: employee.firstName,
-      lastName: employee.lastName,
-      username: employee.username,
-      password: employee.password
-    }
-  });
-  return response;
+export interface Employee {
+  id: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  username: string;
+  password: string;
+  employeeId: string;
+}
+export interface LeaveType {
+  id: number;
+  name: string;
+  deleted: boolean;
 }

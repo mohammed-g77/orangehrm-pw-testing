@@ -1,27 +1,38 @@
 [
   {
     "id": "1",
-    "username": "mghanem1",
-    "password": "Password123!"
+    "firstName": "Mohammed",
+    "middleName": "Mohamed",
+    "lastName": "Mohammed",
+    "username": "Mohammed",
+    "password": "Haneen123@"
   },
   {
     "id": "2",
-    "username": "akhan2",
-    "password": "Password123!"
+    "firstName": "Ahmed",
+    "lastName": "Ahmed",
+    "username": "Ahmed",
+    "password": "Haneen123@"
   },
   {
     "id": "3",
-    "username": "ssaleh3",
-    "password": "Password123!"
+    "firstName": "Sara",
+    "lastName": "Sara",
+    "username": "Sara",
+    "password": "Haneen123@"
   },
   {
     "id": "4",
-    "username": "ohassan4",
-    "password": "Password123!"
-  },
+    "firstName": "Omar",
+    "lastName": "Omar",
+    "username": "Omar",
+    "password": "Haneen123@"
+    },
   {
     "id": "5",
-    "username": "lmahmoud5",
-    "password": "Password123!"
+    "firstName": "Ali",
+    "lastName": "Ali",
+    "username": "Ali",
+    "password": "Haneen123@"
   }
 ]
