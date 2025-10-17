@@ -115,7 +115,6 @@ test.describe('Add employees and assign leave entitlement days test', () => {
     expect(entitlementResults.filter(r => r.success).length).toBeGreaterThan(0);
   });
 
-  // Clean up - delete all added employees after the test
   test.afterAll(async ({ request }) => {
   for (const emp of addedEmployees) {
     if (!emp.empNumber) continue;
