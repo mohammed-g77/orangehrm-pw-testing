@@ -6,7 +6,8 @@ export class AddEmployee {
 
     // Locators
     private get pimMenu() {
-        return this.page.locator('span:has-text("PIM")');
+        // Try span first, fallback to other options if needed
+        return this.page.locator('span:has-text("PIM")').or(this.page.locator('a:has-text("PIM")'));
     }
 
     private get addEmployeeBtn() {
@@ -48,15 +49,38 @@ export class AddEmployee {
     }
     // Actions
     async openPIM() {
-        await expect(this.pimMenu).toBeVisible();
-        await this.pimMenu.click();
+        // Wait for any loaders to finish
+        await this.page.locator('.oxd-form-loader').waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {});
+        
+        // Try to find PIM menu with multiple locator strategies
+        const pimSpan = this.page.locator('span:has-text("PIM")');
+        const pimLink = this.page.locator('a:has-text("PIM")');
+        
+        try {
+            await expect(pimSpan).toBeVisible({ timeout: 10000 });
+            await pimSpan.click();
+        } catch {
+            await expect(pimLink).toBeVisible({ timeout: 10000 });
+            await pimLink.click();
+        }
+        
+        // Wait for PIM page to load - check for Add button instead of networkidle
+        await expect(this.addEmployeeBtn).toBeVisible({ timeout: 10000 });
+        await this.page.waitForTimeout(300);
     }
-    async addEmployee(firstName: string, lastName: string, username: string, password: string, confirmPassword: string, middleName?: string, photo?: string) {
+    async addEmployee(firstName: string, lastName: string, username: string, password: string, confirmPassword: string, middleName?: string, photo?: string): Promise<string> {
         await expect(this.addEmployeeBtn).toBeVisible();
         await this.addEmployeeBtn.click();
-        await expect(this.page).toHaveURL(/addEmployee/);
-
-        await expect(this.firstNameIn).toBeVisible();
+        
+        // Wait for navigation to add employee page
+        await expect(this.page).toHaveURL(/addEmployee/, { timeout: 10000 });
+        
+        // Wait for loaders to finish and form to be ready
+        await this.page.locator('.oxd-form-loader').waitFor({ state: 'hidden', timeout: 10000 }).catch(() => {});
+        
+        // Wait for form elements to be ready - check for firstName field
+        await expect(this.firstNameIn).toBeVisible({ timeout: 10000 });
+        
         await this.firstNameIn.fill(firstName);
         await expect(this.middleNameIn).toBeVisible();
         await this.middleNameIn.fill(middleName || '');
@@ -69,7 +93,8 @@ export class AddEmployee {
         await expect(this.switchLoginDetails).toBeVisible();
         await this.switchLoginDetails.click();
         await expect(this.userNameIn).toBeVisible();
-        await this.userNameIn.fill(`${username}_${this.randomNum}`);
+        const actualUsername = `${username}_${this.randomNum}`;
+        await this.userNameIn.fill(actualUsername);
         await expect(this.passwordIn).toBeVisible();
         await this.passwordIn.fill(password);
         await expect(this.confirmPasswordIn).toBeVisible();
@@ -80,6 +105,7 @@ export class AddEmployee {
         // await this.page.waitForTimeout(10000);
         
         await expect(this.page.locator('h6:has-text("Personal Details")')).toBeVisible({ timeout: 10000 });
-
+        
+        return actualUsername;
     }
 }

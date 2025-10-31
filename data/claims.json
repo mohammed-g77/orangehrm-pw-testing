@@ -1,0 +1,86 @@
+[
+  {
+    "id": "1",
+    "claimType": "Travel Allowance",
+    "currency": "Iraqi Dinar",
+    "event": "Medical Reimbursement",
+    "remarks": "Annual health checkup expenses",
+    "expenses": [
+      {
+        "type": "Transport",
+        "date": "2024-15-01", 
+        "amount": "150.00",
+        "notes": "Doctor consultation fee"
+      },
+      {
+        "type": "Transport",
+        "date": "2024-16-01",  
+        "amount": "75.50",
+        "notes": "Prescription medicines"
+      },
+      {
+        "type": "Transport",
+        "date": "2024-17-01",  
+        "amount": "200.00",
+        "notes": "Lab tests"
+      }
+    ],
+    "adminAction": "Approve"
+  },
+  {
+    "id": "2",
+    "claimType": "Travel Allowance",
+    "currency": "Iraqi Dinar",
+    "event": "Travel Allowance",
+    "remarks": "Travel expenses for business conference",
+    "expenses": [
+      {
+        "type": "Transport",
+        "date": "2024-10-02",  
+        "amount": "500.00",
+        "notes": "Flight tickets"
+      },
+      {
+        "type": "Transport",
+        "date": "2024-11-02",  
+        "amount": "150.00",
+        "notes": "Hotel accommodation"
+      },
+      {
+        "type": "Transport",
+        "date": "2024-12-02",  
+        "amount": "80.00",
+        "notes": "Local transportation"
+      }
+    ],
+    "adminAction": "Reject"
+  },
+  {
+    "id": "3",
+    "claimType": "Travel Allowance",
+    "currency": "Iraqi Dinar",
+    "event": "Accommodation",
+    "remarks": "Accommodation expenses during business trip",
+    "expenses": [
+      {
+        "type": "Transport",
+        "date": "2024-05-03",  
+        "amount": "120.00",
+        "notes": "Lunch with client"
+      },
+      {
+        "type": "Transport",
+        "date": "2024-06-03",  
+        "amount": "95.00",
+        "notes": "Dinner meeting"
+      },
+      {
+        "type": "Transport",
+        "date": "2024-07-03",  
+        "amount": "65.00",
+        "notes": "Coffee meeting"
+      }
+    ],
+    "adminAction": "NoAction"
+  }
+]
