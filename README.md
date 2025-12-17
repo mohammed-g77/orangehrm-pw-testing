@@ -1,94 +1,206 @@
-# OrangeHRM Playwright Testing
+# OrangeHRM Playwright Automation Project
 
-This repository contains end-to-end tests for the OrangeHRM application using Playwright. The tests focus on key functionalities such as login, ensuring reliable automation for UI interactions.
+A Playwright test automation project for testing the **OrangeHRM** web application. This project includes UI tests, API tests, and accessibility tests using the Page Object Model (POM) pattern.
 
-## Table of Contents
+---
 
-- [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Running Tests](#running-tests)
-- [Configuration](#configuration)
-- [Fixtures](#fixtures)
-- [Reporting](#reporting)
-- [Contributing](#contributing)
-- [License](#license)
+## What This Project Tests
 
- 
+This project automates testing for the following areas of OrangeHRM:
+
+| Area | Description |
+|------|-------------|
+| **Login** | User authentication (login/logout) |
+| **Dashboard** | Main dashboard after login |
+| **PIM (Personnel Information Management)** | Adding employees |
+| **Admin** | Admin page functionality |
+| **Leave Management** | Leave entitlement and approval workflows |
+| **Accessibility** | WCAG accessibility checks using Axe-core |
+
+---
+
+## Tech Stack
+
+- **[Playwright](https://playwright.dev/)** - End-to-end testing framework
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
+- **[@axe-core/playwright](https://www.npmjs.com/package/@axe-core/playwright)** - Accessibility testing
+
+---
+
+## Folder Structure
+
+```
+orangehrm-pw-testing/
+├── pages/                  # Page Object Model classes
+│   ├── LoginPage.ts        # Login page actions & selectors
+│   ├── AddEmployee.ts      # Add employee page
+│   └── LeavePage.ts        # Leave management page
+├── tests/
+│   ├── ui/                 # UI (E2E) tests
+│   │   ├── login.spec.ts
+│   │   ├── addEmployee.spec.ts
+│   │   └── axe-core.spec.ts    # Accessibility tests
+│   └── api/                # API tests
+│       ├── addEmployeesAndLeaveEntitlement.spec.ts
+│       └── EmployeeLeaveApplicationAndAdminApproval.spec.ts
+├── helpers/                # Utility/helper functions
+├── data/                   # Test data files
+├── package.json
+└── tsconfig.json
+```
+
+---
+
 ## Installation
 
-1. Clone the repository:
-```
+### 1. Clone the repository
+
+```bash
 git clone https://github.com/mohammed-g77/orangehrm-pw-testing.git
 cd orangehrm-pw-testing
 ```
 
-2. Install dependencies:
-```
+### 2. Install dependencies
+
+```bash
 npm install
 ```
-3. Install Playwright browsers:
-```
+
+### 3. Install Playwright browsers
+
+```bash
 npx playwright install
 ```
-## Project Structure
 
-- **.github/workflows**: GitHub Actions workflows for CI/CD.
-- **fixtures**: Custom fixtures for test setup (e.g., page objects or data providers).
-- **node_modules**: Installed dependencies (not tracked in Git).
-- **pages**: Page Object Models (e.g., `LoginPage.ts` for login-related interactions,`addEmployee.spec.ts` for addEmployee-related interactions ).
-- **test-results**: Generated test artifacts like screenshots, videos, and traces.
-- **tests**: Test specs (e.g., `login.spec.ts` for login tests ,`addEmployee.spec.ts` for addEmployee tests ).
-- **playwright.yml**: Playwright configuration file.
-- **.gitignore**: Files and directories to ignore in Git.
-- **package.json**: Project metadata and dependencies.
-- **package-lock.json**: Locked versions of dependencies.
+---
 
-## Running Tests
+## How to Run Tests
 
-To run all tests in headless mode:
-```
+### Run all tests
+
+```bash
 npx playwright test
 ```
-Run tests in headed mode (with browser UI):
-```
+
+### Run all tests with browser visible (headed mode)
+
+```bash
 npx playwright test --headed
 ```
-Run a specific test file:
-```
-npx playwright test tests/login.spec.ts
 
+### Run a specific test file
+
+```bash
+# Run login tests only
+npx playwright test tests/ui/login.spec.ts
+
+# Run accessibility tests only
+npx playwright test tests/ui/axe-core.spec.ts
 ```
 
-## Configuration
+### Run tests in UI mode (interactive)
 
-The main configuration is in `playwright.yml`. Key settings include:
-- Browser projects (e.g., Chromium, Firefox, WebKit).
-- Base URL for the OrangeHRM instance (update as needed).
-- Retries, timeouts, and workers for parallel execution.
+```bash
+npx playwright test --ui
+```
 
-Example snippet:
-```
-yaml
-projects:
-  - name: 'chromium'
-    use: { ...devices['Desktop Chrome'] }
-```
-## Fixtures
-Fixtures are defined in the fixtures directory. They provide reusable setup for tests, such as authenticated sessions or mocked data.
+### Run tests in debug mode
 
-## Reporting
-After running tests, view the HTML report:
+```bash
+npx playwright test --debug
 ```
+
+### View HTML test report
+
+After running tests, view the report:
+
+```bash
 npx playwright show-report
 ```
-Test results (including failures) are stored in `test-results`.
+
+---
+
+## Accessibility Testing
+
+This project uses **@axe-core/playwright** to run accessibility tests against OrangeHRM pages.
+
+### How to run accessibility tests
+
+```bash
+npx playwright test tests/ui/axe-core.spec.ts
+```
+
+### Pages tested for accessibility
+
+- Dashboard
+- PIM (Personnel Information Management)
+- Admin
+
+### Where to find accessibility reports
+
+After running accessibility tests, you can find the results in:
+
+1. **Console output** - Violations are logged to the console
+2. **Test artifacts** - JSON files attached to each test:
+   - `axe-Dashboard.json`
+   - `axe-PIM.json`
+   - `axe-Admin.json`
+3. **HTML Report** - Run `npx playwright show-report` to see detailed results
+
+### Current exclusions
+
+> **Note:** The `color-contrast` rule is temporarily disabled because OrangeHRM has known color contrast issues. This allows the tests to focus on other accessibility violations first.
+
+---
+
+## Notes / Troubleshooting
+
+### Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| `Cannot find module '@axe-core/playwright'` | Run `npm install` to install dependencies |
+| `Browser not found` | Run `npx playwright install` to install browsers |
+| Tests timeout | Increase timeout in test or check if OrangeHRM is accessible |
+| Login fails | Verify credentials: username = `Admin`, password = `admin123` |
+
+### OrangeHRM Demo URL
+
+Tests run against the OrangeHRM demo instance. Make sure you have internet access.
+
+### Tips
+
+- Use `--headed` flag to see the browser while tests run
+- Use `--debug` flag to step through tests
+- Use `--ui` flag for an interactive test runner experience
+
+---
+
+## Scripts
+
+Available npm scripts in `package.json`:
+
+```bash
+# Run all tests in headed mode
+npm test
+```
+
+---
+
+## License
+
+This project is licensed under the **ISC License**.
+
+---
 
 ## Contributing
 
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/new-test`).
-3. Commit changes (`git commit -m 'Add new test'`).
-4. Push to the branch (`git push origin feature/new-test`).
-5. Open a Pull Request.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/my-feature`)
+3. Commit your changes (`git commit -m 'Add my feature'`)
+4. Push to the branch (`git push origin feature/my-feature`)
+5. Open a Pull Request
 
-Please follow code style guidelines and add tests for new features.
+---
+
+**Happy Testing!** 
